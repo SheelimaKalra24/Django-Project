@@ -1,0 +1,35 @@
+{% extends 'demo.html' %}
+
+
+{% block 'title' %}
+    <title>create_user</title>
+    {% endblock 'title' %}
+
+{% block 'contant' %}
+<body>
+    <h1>Create User</h1>
+    {% for message in messages %}
+    <h2>{{message}}</h2>
+    {% endfor %}
+    <form method="POST">
+        {% csrf_token %}
+        <label for="firstName">First name:</label><br>
+        <input type="text" id="firstName" name="firstName" required><br><br>
+
+        <label for="lastName">Last name:</label><br>
+        <input type="text" id="lastName" name="lastName" required><br><br>
+
+        <label for="lastName">user name:</label><br>
+        <input type="text" id="userName" name="userName" required><br><br>
+
+        <label for="password1">Password:</label><br>
+        <input type="password" id="password1" name="password1" required><br><br>
+
+        <label for="password2">Confirm Password:</label><br>
+        <input type="password" id="password2" name="password2" required><br><br>
+
+        <button type="submit">Create User</button>
+    </form>
+
+</body>
+{% endblock 'contant' %}

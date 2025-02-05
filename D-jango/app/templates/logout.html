@@ -1,0 +1,20 @@
+{% extends 'demo.html' %}
+
+
+{% block 'title' %}
+    <title>create_user</title>
+    {% endblock 'title' %}
+
+{% block 'contant' %}
+<body>
+    <h1>Confirm logout </h1>
+    {% for message in messages %}
+    <h2>{{message}}</h2>
+    {% endfor %}
+     <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Logout</button>
+    </form>
+
+</body>>
+{% endblock 'contant' %}

@@ -1,0 +1,44 @@
+{% extends 'demo.html' %}
+
+
+{% block 'title' %}
+    <title>index</title>
+    {% endblock 'title' %}
+
+{% block 'contant' %}
+<body>
+    <h1>View Model Crud</h1>
+    <form method="post" class='container-fluid' enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Title</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" name='title' value="{{update.title}}" required>
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label">Description:</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" name='des' value="{{update.des}}" required>
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label">Image:</label>
+          <input type="file" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name='image' value="{{update.image}}" required>
+        </div>
+        <button type="submit">Register</button>
+    </form>
+
+      <div class="container-fluid flex" style="display: flex;">
+        {% for post in posts %}
+        <div class="card" style="width: 18rem;">
+          <img src="{{post.image.url}}" alt="Cultural Fest" class="event-image" />
+          <div class="card-body">
+            <h5 class="card-title">{{post.title}}</h5>
+            <p class="card-text">{{post.des}}</p>
+            <a href="{% url 'update'  post.id %}" class="btn btn-primary">Update</a>
+            <a  href="{% url 'delete'  post.id %}" class="btn btn-danger mt-2">Delete</a>
+            <a href="{% url 'see' post.id%}" class="btn btn-info">View</a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    
+</body>
+{% endblock 'contant' %}
