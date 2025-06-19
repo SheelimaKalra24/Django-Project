@@ -6,39 +6,44 @@
     {% endblock 'title' %}
 
 {% block 'contant' %}
-<body>
-    <h1>View Model Crud</h1>
-    <form method="post" class='container-fluid' enctype="multipart/form-data">
+<div class="container py-4">
+    <h1 class="mb-4 text-center fw-bold text-primary">View Model Crud</h1>
+    <form method="post" class="row g-3 shadow p-4 rounded bg-white mb-5" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="mb-3">
+        <div class="col-md-4">
           <label for="exampleFormControlInput1" class="form-label">Title</label>
           <input type="text" class="form-control" id="exampleFormControlInput1" name='title' value="{{update.title}}" required>
         </div>
-        <div class="mb-3">
+        <div class="col-md-4">
           <label for="exampleFormControlTextarea1" class="form-label">Description:</label>
           <input type="text" class="form-control" id="exampleFormControlInput1" name='des' value="{{update.des}}" required>
         </div>
-        <div class="mb-3">
-          <label for="exampleFormControlTextarea1" class="form-label">Image:</label>
-          <input type="file" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name='image' value="{{update.image}}" required>
+        <div class="col-md-4">
+          <label for="exampleFormControlInput1" class="form-label">Image:</label>
+          <input type="file" class="form-control" id="exampleFormControlInput1" name='image' value="{{update.image}}" required>
         </div>
-        <button type="submit">Register</button>
+        <div class="col-12 text-end">
+          <button type="submit" class="btn btn-primary px-4">Register</button>
+        </div>
     </form>
 
-      <div class="container-fluid flex" style="display: flex;">
-        {% for post in posts %}
-        <div class="card" style="width: 18rem;">
-          <img src="{{post.image.url}}" alt="Cultural Fest" class="event-image" />
-          <div class="card-body">
+    <div class="row g-4 justify-content-center">
+      {% for post in posts %}
+      <div class="col-md-4 d-flex align-items-stretch">
+        <div class="card shadow h-100">
+          <img src="{{post.image.url}}" alt="Cultural Fest" class="card-img-top event-image" style="height: 220px; object-fit: cover;" />
+          <div class="card-body d-flex flex-column">
             <h5 class="card-title">{{post.title}}</h5>
             <p class="card-text">{{post.des}}</p>
-            <a href="{% url 'update'  post.id %}" class="btn btn-primary">Update</a>
-            <a  href="{% url 'delete'  post.id %}" class="btn btn-danger mt-2">Delete</a>
-            <a href="{% url 'see' post.id%}" class="btn btn-info">View</a>
+          </div>
+          <div class="card-footer bg-white border-0 d-flex justify-content-between">
+            <a href="{% url 'update'  post.id %}" class="btn btn-primary btn-sm">Update</a>
+            <a href="{% url 'delete'  post.id %}" class="btn btn-danger btn-sm">Delete</a>
+            <a href="{% url 'see' post.id%}" class="btn btn-info btn-sm">View</a>
           </div>
         </div>
-        {% endfor %}
       </div>
-    
-</body>
+      {% endfor %}
+    </div>
+</div>
 {% endblock 'contant' %}
