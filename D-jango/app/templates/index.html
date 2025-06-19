@@ -23,23 +23,41 @@
           <input type="file" class="form-control" id="exampleFormControlInput1" name='image' value="{{update.image}}" required>
         </div>
         <div class="col-12 text-end">
-          <button type="submit" class="btn btn-primary px-4">Register</button>
+          <button type="submit" class="btn btn-primary px-4"><i class="fa-solid fa-plus"></i> Register</button>
         </div>
     </form>
+
+    <!-- Toast notification block (for future use) -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+      <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <i class="fa-solid fa-circle-info me-2 text-primary"></i>
+          <strong class="me-auto">Notification</strong>
+          <small>Now</small>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+          This is a creative toast notification!
+        </div>
+      </div>
+    </div>
 
     <div class="row g-4 justify-content-center">
       {% for post in posts %}
       <div class="col-md-4 d-flex align-items-stretch">
-        <div class="card shadow h-100">
-          <img src="{{post.image.url}}" alt="Cultural Fest" class="card-img-top event-image" style="height: 220px; object-fit: cover;" />
+        <div class="card shadow h-100 position-relative group">
+          <div class="position-relative">
+            <img src="{{post.image.url}}" alt="Cultural Fest" class="card-img-top event-image" style="height: 220px; object-fit: cover; transition: filter 0.3s;" />
+            <div class="position-absolute top-0 start-0 w-100 h-100" style="background:rgba(80,80,200,0.08); opacity:0; transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0"></div>
+          </div>
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">{{post.title}}</h5>
             <p class="card-text">{{post.des}}</p>
           </div>
           <div class="card-footer bg-white border-0 d-flex justify-content-between">
-            <a href="{% url 'update'  post.id %}" class="btn btn-primary btn-sm">Update</a>
-            <a href="{% url 'delete'  post.id %}" class="btn btn-danger btn-sm">Delete</a>
-            <a href="{% url 'see' post.id%}" class="btn btn-info btn-sm">View</a>
+            <a href="{% url 'update'  post.id %}" class="btn btn-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i> Update</a>
+            <a href="{% url 'delete'  post.id %}" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i> Delete</a>
+            <a href="{% url 'see' post.id%}" class="btn btn-info btn-sm"><i class="fa-solid fa-eye"></i> View</a>
           </div>
         </div>
       </div>
